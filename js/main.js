@@ -8,7 +8,7 @@ var gameOver = false;
 var $square = $("");
 var $buttons = $("button");
 
-function tableHTML(x){
+function renderTableHTML(x){
   var table = "";
   for(j = 1; j <= x; j++){
     var row = ("<div class='row row-" + j + "'>");
@@ -24,12 +24,15 @@ function tableHTML(x){
     $tableTarget.html(table);
   };
 
-tableHTML(boardSize);
+renderTableHTML(boardSize);
 $square = $(".square");
 
 function setBoardSize(){
   boardSize = parseInt($(this).text().split("")[0]);
-  tableHTML(boardSize);
+  renderTableHTML(boardSize);
+  playerTurn = 1;
+  $playerTurn.text(playerTurn);
+  turnCount = 0;
   $square = $(".square");
   $square.click(this, takeTurn);
   return false;
