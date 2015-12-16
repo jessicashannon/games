@@ -33,6 +33,7 @@ function setBoardSize(){
   playerTurn = 1;
   $playerTurn.text(playerTurn);
   turnCount = 0;
+  $(".turn-count").text(turnCount);
   $square = $(".square");
   $square.click(this, takeTurn);
   return false;
@@ -111,6 +112,13 @@ function checkForWin(){
   });
 };
 
+function checkForTie(){
+  if($('.clicked').length == boardSize * boardSize){
+    $(".message").html("<div class='message text-danger'>You're tied!</div>")
+    gameOver = true;
+  };
+};
+
 function takeTurn(){
   var $element = $(this);
   if (gameOver == true){                             // Do not play when game is ended
@@ -123,6 +131,7 @@ function takeTurn(){
     $element.addClass("clicked");
     updatePlayerTurn();
     updateTurnCount();
+    checkForTie();
     checkForWin();
   }
 };
